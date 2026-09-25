@@ -1,0 +1,647 @@
+<title>Mohamed Amine Ayadi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#EEF0F3;
+    --grid-line: rgba(31,58,95,0.07);
+    --surface:#FFFFFF;
+    --surface-2:#E7EAEF;
+    --text:#12161F;
+    --text-muted:#54606F;
+    --border:#D2D8E0;
+    --accent:#D9622B;
+    --accent-ink:#FFFFFF;
+    --steel:#1F3A5F;
+    --steel-2:#2E4E7A;
+    --ok:#3D7A55;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#0D1117; --grid-line: rgba(140,170,210,0.06); --surface:#141A22; --surface-2:#1B222C;
+      --text:#E8ECF1; --text-muted:#93A0B0; --border:#293240;
+      --accent:#EC8C52; --accent-ink:#141821; --steel:#6D9BC9; --steel-2:#8FB3DA; --ok:#5CAE7C;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0D1117; --grid-line: rgba(140,170,210,0.06); --surface:#141A22; --surface-2:#1B222C;
+    --text:#E8ECF1; --text-muted:#93A0B0; --border:#293240;
+    --accent:#EC8C52; --accent-ink:#141821; --steel:#6D9BC9; --steel-2:#8FB3DA; --ok:#5CAE7C;
+    color-scheme: dark;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    background:
+      linear-gradient(var(--grid-line) 1px, transparent 1px) 0 0/100% 34px,
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px) 0 0/34px 100%,
+      var(--bg);
+    color:var(--text);
+    font-family:"IBM Plex Sans", Arial, sans-serif;
+    margin:0; line-height:1.55; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1020px; margin:0 auto; padding-inline:20px;}
+  h1,h2,h3{font-family:"Big Shoulders Display","IBM Plex Sans",sans-serif; font-weight:800; text-transform:uppercase; letter-spacing:0.3px; text-wrap:balance; margin:0;}
+  .mono{font-family:"IBM Plex Mono",monospace;}
+  a{color:var(--steel-2);}
+  img{max-width:100%;}
+  button{font-family:inherit;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+  html{scroll-behavior:smooth;}
+
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---- HUD bracket treatment (used instead of generic rounded+shadow cards) ---- */
+  .plate{position:relative; background:var(--surface); border:1px solid var(--border);}
+  .plate::before,.plate::after{content:""; position:absolute; width:13px; height:13px; pointer-events:none; opacity:.85;}
+  .plate::before{top:-1px; left:-1px; border-top:2px solid var(--accent); border-left:2px solid var(--accent);}
+  .plate::after{bottom:-1px; right:-1px; border-bottom:2px solid var(--accent); border-right:2px solid var(--accent);}
+
+  /* ---- nav ---- */
+  nav{
+    position:sticky; top:env(safe-area-inset-top,0px); z-index:30;
+    background:color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter:blur(8px); border-bottom:1px solid var(--border);
+    animation:dropIn .6s cubic-bezier(.2,.7,.3,1) both;
+  }
+  @keyframes dropIn{ from{transform:translateY(-100%);} to{transform:translateY(0);} }
+  .nav-inner{max-width:1020px; margin:0 auto; padding:13px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px;}
+  .nav-mark{font-family:"IBM Plex Mono",monospace; font-size:12.5px; font-weight:600; letter-spacing:0.5px;}
+  .nav-mark span{color:var(--accent);}
+  .nav-links{display:flex; gap:18px; list-style:none; margin:0; padding:0; flex-wrap:wrap;}
+  .nav-links a{position:relative; font-family:"IBM Plex Mono",monospace; font-size:11.5px; text-decoration:none; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.6px; padding-bottom:3px;}
+  .nav-links a::after{content:""; position:absolute; left:0; right:100%; bottom:0; height:1.5px; background:var(--accent); transition:right .25s ease;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{right:0;}
+
+  /* ---- hero / nameplate ---- */
+  header.hero{padding:52px 0 0;}
+  .hero-grid{display:grid; grid-template-columns:auto 1fr; gap:32px; align-items:center;}
+  .photo-frame{position:relative; width:150px; height:150px; animation:floatY 6s ease-in-out infinite;}
+  @keyframes floatY{0%,100%{transform:translateY(0);} 50%{transform:translateY(-6px);}}
+  .hero-photo{width:150px; height:150px; border-radius:6px; object-fit:cover; border:3px solid var(--surface); outline:2px solid var(--border); box-shadow:0 10px 28px rgba(0,0,0,0.16); display:block;}
+  .photo-frame::before,.photo-frame::after{content:""; position:absolute; width:18px; height:18px; opacity:.9;}
+  .photo-frame::before{top:-9px; left:-9px; border-top:2px solid var(--accent); border-left:2px solid var(--accent);}
+  .photo-frame::after{bottom:-9px; right:-9px; border-bottom:2px solid var(--accent); border-right:2px solid var(--accent);}
+  .eyebrow{font-family:"IBM Plex Mono",monospace; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; display:block;}
+  .hero-name{font-size:clamp(32px,6vw,48px); line-height:1.02;}
+  .hero-role{color:var(--text-muted); font-size:16px; margin-top:10px; max-width:62ch;}
+  @media (max-width:520px){ .hero-grid{grid-template-columns:1fr; text-align:center;} .photo-frame{margin:0 auto;} }
+
+  /* status/nameplate strip */
+  .status-bar{
+    margin-top:28px; display:flex; flex-wrap:wrap; align-items:center; gap:0;
+    font-family:"IBM Plex Mono",monospace; font-size:11.5px; letter-spacing:.3px;
+    border:1px solid var(--border); border-radius:0;
+  }
+  .status-item{padding:11px 16px; border-right:1px solid var(--border); color:var(--text-muted); display:flex; align-items:center; gap:8px;}
+  .status-item:last-child{border-right:none;}
+  .status-item b{color:var(--text); font-weight:600;}
+  .live-dot{width:7px; height:7px; border-radius:50%; background:var(--ok); box-shadow:0 0 0 0 rgba(61,122,85,.5); animation:pulse 2.2s infinite;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 color-mix(in srgb, var(--ok) 55%, transparent);}
+    70%{box-shadow:0 0 0 7px transparent;}
+    100%{box-shadow:0 0 0 0 transparent;}
+  }
+
+  /* keyword strip */
+  .keyword-label{font-family:"IBM Plex Mono",monospace; font-size:11px; letter-spacing:.6px; text-transform:uppercase; color:var(--text-muted); margin:22px 0 10px;}
+  .keyword-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .kw{
+    font-family:"IBM Plex Mono",monospace; font-size:12px; padding:6px 11px;
+    border:1px solid var(--border); background:var(--surface); color:var(--text);
+    transition:transform .2s ease, border-color .2s ease, color .2s ease, background .2s ease;
+  }
+  .kw:hover{transform:translateY(-2px); border-color:var(--accent); color:var(--accent-ink); background:var(--accent);}
+
+  /* stats row */
+  .stat-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-top:26px;}
+  .stat{padding:16px; text-align:left;}
+  .stat b{display:block; font-family:"IBM Plex Mono",monospace; font-variant-numeric:tabular-nums; font-size:26px; color:var(--accent); line-height:1;}
+  .stat span{display:block; margin-top:6px; font-size:12px; color:var(--text-muted);}
+
+  /* ---- sections ---- */
+  section{padding:40px 0; border-top:1px solid var(--border);}
+  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:22px;}
+  .section-num{font-family:"IBM Plex Mono",monospace; color:var(--accent); font-size:12px; border:1px solid var(--border); padding:2px 7px;}
+  .section-title{font-size:22px;}
+  .section-sub{color:var(--text-muted); font-size:14px; margin:-14px 0 22px; max-width:66ch;}
+
+  .prose{max-width:70ch; color:var(--text-muted);}
+  .prose strong{color:var(--text); font-weight:600;}
+
+  /* ---- domains ---- */
+  .domain-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px;}
+  .domain-card{padding:16px; transition:transform .25s ease, border-color .25s ease;}
+  .domain-card:hover{transform:translateY(-4px); border-color:var(--accent);}
+  .domain-card .num{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--accent);}
+  .domain-card h3{font-size:15px; text-transform:none; letter-spacing:0; margin:6px 0 6px;}
+  .domain-card p{margin:0; font-size:13px; color:var(--text-muted);}
+
+  /* ---- experience ---- */
+  .job{display:grid; grid-template-columns:150px 1fr; gap:20px; padding:18px 0; border-bottom:1px solid var(--border);}
+  .job:last-child{border-bottom:none;}
+  .job-date{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--text-muted); padding-top:2px;}
+  .job-title{font-size:16px; font-weight:600; margin:0 0 2px;}
+  .job-org{color:var(--accent); font-size:13.5px; font-weight:500; margin-bottom:8px;}
+  .job ul{margin:0; padding-left:18px; color:var(--text-muted); font-size:14.5px;}
+  .job li{margin-bottom:5px;}
+  @media (max-width:640px){ .job{grid-template-columns:1fr;} .job-date{padding-top:0;} }
+
+  /* ---- projects ---- */
+  .proj-filterbar{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;}
+  .filter-btn{
+    font-family:"IBM Plex Mono",monospace; font-size:11.5px; padding:6px 12px;
+    background:var(--surface); border:1px solid var(--border); color:var(--text-muted); cursor:pointer;
+    transition:all .2s ease;
+  }
+  .filter-btn:hover{border-color:var(--accent); color:var(--accent);}
+  .filter-btn.active{background:var(--accent); border-color:var(--accent); color:var(--accent-ink);}
+  .proj-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px;}
+  .card{
+    padding:18px; display:flex; flex-direction:column; gap:10px; text-align:left; width:100%;
+    cursor:pointer; transition:transform .25s ease, border-color .25s ease;
+  }
+  .card:hover{transform:translateY(-5px); border-color:var(--accent);}
+  .card-top{display:flex; justify-content:space-between; align-items:flex-start; gap:10px;}
+  .card h3{font-size:16px; text-transform:none; letter-spacing:0;}
+  .card-year{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--text-muted); white-space:nowrap;}
+  .card p{margin:0; font-size:13.5px; color:var(--text-muted);}
+  .card-tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:4px;}
+  .card-tags span{font-family:"IBM Plex Mono",monospace; font-size:10.5px; background:var(--surface-2); border:1px solid var(--border); padding:3px 7px; color:var(--text-muted);}
+  .card-more{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--accent); display:flex; align-items:center; gap:5px;}
+  .card-more svg{transition:transform .2s ease;}
+  .card:hover .card-more svg{transform:translateX(3px);}
+
+  /* ---- skills ---- */
+  .skill-groups{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:22px;}
+  .skill-group h3{font-size:12px; letter-spacing:0.5px; color:var(--text-muted); margin-bottom:10px;}
+  .skill-list{display:flex; flex-wrap:wrap; gap:7px;}
+  .skill-list span{font-family:"IBM Plex Mono",monospace; font-size:12px; padding:5px 9px; background:var(--surface); border:1px solid var(--border); transition:transform .2s ease, border-color .2s ease;}
+  .skill-list span:hover{transform:translateY(-2px); border-color:var(--accent); color:var(--accent);}
+
+  /* ---- education / leadership ---- */
+  .edu{display:grid; grid-template-columns:150px 1fr; gap:20px; padding:14px 0; border-bottom:1px solid var(--border);}
+  .edu:last-child{border-bottom:none;}
+  .edu-date{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--text-muted);}
+  .edu-title{font-weight:600; font-size:15px; margin:0 0 3px;}
+  .edu-detail{font-size:13.5px; color:var(--text-muted);}
+  @media (max-width:640px){ .edu{grid-template-columns:1fr;} }
+
+  /* ---- contact ---- */
+  .contact-box{background:var(--steel); color:#fff; padding:32px; display:grid; grid-template-columns:1.2fr 1fr; gap:24px; position:relative;}
+  .contact-box::before,.contact-box::after{content:""; position:absolute; width:16px; height:16px;}
+  .contact-box::before{top:-1px; left:-1px; border-top:2px solid var(--accent); border-left:2px solid var(--accent);}
+  .contact-box::after{bottom:-1px; right:-1px; border-bottom:2px solid var(--accent); border-right:2px solid var(--accent);}
+  .contact-box h2{color:#fff;}
+  .contact-box .prose{color:rgba(255,255,255,0.78); max-width:44ch;}
+  .contact-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px;}
+  .contact-row{display:flex; align-items:center; justify-content:space-between; gap:10px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.18); padding:9px 12px; transition:background .2s ease;}
+  .contact-row:hover{background:rgba(255,255,255,0.14);}
+  .contact-row .val{font-family:"IBM Plex Mono",monospace; font-size:12.5px; word-break:break-all;}
+  .copy-btn{font-family:"IBM Plex Mono",monospace; font-size:11px; background:var(--accent); color:var(--accent-ink); border:none; padding:6px 9px; cursor:pointer; white-space:nowrap; transition:filter .2s ease;}
+  .copy-btn:hover{filter:brightness(1.1);}
+  @media (max-width:640px){ .contact-box{grid-template-columns:1fr;} }
+
+  footer{padding:24px 0 48px; text-align:center;}
+  footer p{font-family:"IBM Plex Mono",monospace; font-size:11.5px; color:var(--text-muted);}
+
+  /* ---- modal ---- */
+  .modal-backdrop{
+    position:fixed; inset:0; background:rgba(8,10,14,0.6); backdrop-filter:blur(2px);
+    display:flex; align-items:center; justify-content:center; padding:20px; z-index:100;
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+  }
+  .modal-backdrop.open{opacity:1; pointer-events:auto;}
+  .modal{
+    background:var(--surface); border:1px solid var(--border); position:relative;
+    max-width:560px; width:100%; max-height:82vh; overflow-y:auto; padding:26px;
+    transform:translateY(16px) scale(.98); opacity:0; transition:transform .25s cubic-bezier(.2,.7,.3,1), opacity .25s ease;
+  }
+  .modal::before,.modal::after{content:""; position:absolute; width:16px; height:16px;}
+  .modal::before{top:-1px; left:-1px; border-top:2px solid var(--accent); border-left:2px solid var(--accent);}
+  .modal::after{bottom:-1px; right:-1px; border-bottom:2px solid var(--accent); border-right:2px solid var(--accent);}
+  .modal-backdrop.open .modal{transform:translateY(0) scale(1); opacity:1;}
+  .modal-top{display:flex; justify-content:space-between; align-items:flex-start; gap:14px; margin-bottom:6px;}
+  .modal h3{font-size:19px; text-transform:none; letter-spacing:0;}
+  .modal .badge{font-family:"IBM Plex Mono",monospace; font-size:11px; color:var(--accent); margin-bottom:10px; display:block;}
+  .modal-close{background:var(--surface-2); border:1px solid var(--border); width:30px; height:30px; cursor:pointer; color:var(--text); font-size:15px; line-height:1; flex:none;}
+  .modal-close:hover{border-color:var(--accent); color:var(--accent);}
+  .modal p{color:var(--text-muted); font-size:14px;}
+  .modal .card-tags{margin-top:14px;}
+</style>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-mark">AYADI<span>.</span>MA</div>
+    <ul class="nav-links">
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#domaines">Domaines</a></li>
+      <li><a href="#experience">Expérience</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#formation">Formation</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero" id="top">
+    <div class="hero-grid">
+      <div class="photo-frame"><img class="hero-photo" src="photo.jpg" alt="Photo de Mohamed Amine Ayadi"></div>
+      <div>
+        <span class="eyebrow reveal">Ingénieur Informatique Industrielle &amp; Automatique</span>
+        <h1 class="hero-name reveal">Mohamed Amine<br>Ayadi</h1>
+        <p class="hero-role reveal">Étudiant ingénieur en dernière année à l'INSAT (Tunisie), spécialisé en amélioration continue, contrôle-commande et automatisme industriel.</p>
+      </div>
+    </div>
+
+    <div class="status-bar reveal">
+      <div class="status-item"><span class="live-dot"></span> <b>Disponible</b>&nbsp;— PFE, 6 mois, à partir de Fév. 2027</div>
+      <div class="status-item">LIEU — <b>Tunis, Tunisie</b></div>
+      <div class="status-item">PORTÉE — <b>Ouvert à l'international</b></div>
+    </div>
+  </header>
+
+  <section id="profil">
+    <div class="section-head reveal"><span class="section-num">§01</span><h2 class="section-title">Profil</h2></div>
+    <p class="prose reveal">
+      Formé à l'INSAT en <strong>Informatique Industrielle et Automatique</strong>, j'ai acquis une expérience concrète
+      de l'amélioration continue et du contrôle-commande en environnement de production exigeant (sous-traitance
+      électronique, client Bosch) : études de capabilité, AMDEC, résolution structurée de problèmes, et conception
+      d'une chaîne de communication industrielle complète (lecteur QR code, automate Siemens, IHM, serveur OPC, base
+      de données). J'aime transformer des données de production en actions concrètes, et construire des outils qui
+      simplifient le travail des équipes terrain.
+    </p>
+
+    <div class="reveal">
+      <div class="keyword-label">Ouvert aux postes de</div>
+      <div class="keyword-row" id="keyword-row"></div>
+    </div>
+
+  </section>
+
+  <section id="domaines">
+    <div class="section-head reveal"><span class="section-num">§02</span><h2 class="section-title">Domaines &amp; Postes visés</h2></div>
+    <p class="section-sub reveal">Les familles de postes où mon expérience s'applique directement — du terrain qualité à l'analyse de données industrielles.</p>
+    <div class="domain-grid" id="domain-grid"></div>
+  </section>
+
+  <section id="experience">
+    <div class="section-head reveal"><span class="section-num">§03</span><h2 class="section-title">Expérience</h2></div>
+
+    <div class="job reveal">
+      <div class="job-date mono">Juin – Juil. 2026</div>
+      <div>
+        <p class="job-title">Stagiaire Amélioration Continue &amp; Qualité</p>
+        <p class="job-org">Asteelflash Tunisie</p>
+        <ul>
+          <li>Conçu un outil d'automatisation VBA/Excel pour les calculs de capabilité FCT, en remplacement d'un traitement manuel répétitif.</li>
+          <li>Réalisé des études MSA (Cg/Cgk) et de capabilité machine (Cm/Cmk) sur 3 machines goulots.</li>
+          <li>Extrait et analysé sous Power BI les données de test FCT pour identifier le sous-test générant le plus de défauts, au service d'actions correctives qualité.</li>
+          <li>Formé aux méthodologies QRQC, 5 Pourquoi, Ishikawa et 8D ; réalisé une étude AMDEC complète et mis à jour un plan de contrôle.</li>
+          <li>Piloté des actions correctives fournisseur via l'outil PDCA.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job reveal">
+      <div class="job-date mono">Juillet 2025</div>
+      <div>
+        <p class="job-title">Stagiaire Développement de Tests</p>
+        <p class="job-org">Asteelflash Tunisie</p>
+        <ul>
+          <li>Développé un système de contrôle sur un poste d'assemblage : communication complète entre un lecteur QR code industriel (Cognex DataMan), un automate Siemens S7-1200 (TIA Portal), une IHM et une application LabWindows/CVI via un serveur OPC.</li>
+          <li>Vérification en base de données de l'état d'une carte avant assemblage.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="job reveal">
+      <div class="job-date mono">Juil. 2024 – Sept. 2026</div>
+      <div>
+        <p class="job-title">Agent de Support Technique</p>
+        <p class="job-org">Concentrix</p>
+        <ul>
+          <li>Support client en anglais et en français pendant 2 ans, en parallèle des études.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projets">
+    <div class="section-head reveal"><span class="section-num">§04</span><h2 class="section-title">Projets</h2></div>
+    <p class="section-sub reveal">Projets académiques et projets menés en stage. Cliquez sur une carte pour le détail.</p>
+    <div class="proj-filterbar reveal" id="filter-bar"></div>
+    <div class="proj-grid" id="proj-grid"></div>
+  </section>
+
+  <section id="competences">
+    <div class="section-head reveal"><span class="section-num">§05</span><h2 class="section-title">Compétences</h2></div>
+    <div class="skill-groups">
+      <div class="skill-group reveal">
+        <h3>AMÉLIORATION CONTINUE &amp; QUALITÉ</h3>
+        <div class="skill-list">
+          <span>AMDEC</span><span>QRQC</span><span>8D</span><span>5 Pourquoi</span><span>Ishikawa</span><span>PDCA</span><span>MSA (Cg/Cgk)</span><span>Cm/Cmk</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>AUTOMATISME &amp; CONTRÔLE-COMMANDE</h3>
+        <div class="skill-list">
+          <span>TIA Portal</span><span>Siemens S7-1200</span><span>GRAFCET</span><span>GEMMA</span><span>Factory I/O</span><span>IHM</span><span>Serveur OPC</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>DONNÉES &amp; AUTOMATISATION</h3>
+        <div class="skill-list">
+          <span>Power BI</span><span>VBA</span><span>Excel avancé</span><span>SQL (notions)</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>SIMULATION &amp; ROBOTIQUE</h3>
+        <div class="skill-list">
+          <span>ROS2</span><span>Gazebo</span><span>AnyLogic</span><span>Python</span><span>OpenCV</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>GESTION DE PROJET &amp; ERP</h3>
+        <div class="skill-list">
+          <span>Charte de projet</span><span>RACI</span><span>WBS</span><span>PERT/Gantt</span><span>SAP (GPAO/MRP)</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <h3>CERTIFICATIONS &amp; LANGUES</h3>
+        <div class="skill-list">
+          <span>Lean Six Sigma GB (candidat)</span><span>PMP (candidat)</span><span>Arabe natif</span><span>Français courant</span><span>Anglais courant</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="formation">
+    <div class="section-head reveal"><span class="section-num">§06</span><h2 class="section-title">Formation &amp; Leadership</h2></div>
+
+    <div class="edu reveal">
+      <div class="edu-date mono">2022 – Présent</div>
+      <div>
+        <p class="edu-title">Institut National des Sciences Appliquées et de Technologie (INSAT)</p>
+        <p class="edu-detail">Diplôme d'Ingénieur, Informatique Industrielle et Automatique — Tunis, Tunisie</p>
+      </div>
+    </div>
+    <div class="edu reveal">
+      <div class="edu-date mono">2022</div>
+      <div>
+        <p class="edu-title">Baccalauréat Sciences Expérimentales</p>
+        <p class="edu-detail">Lycée Kheireddine, Ariana, Tunisie — Mention Très Bien (18,21/20)</p>
+      </div>
+    </div>
+    <div class="edu reveal">
+      <div class="edu-date mono">2026</div>
+      <div>
+        <p class="edu-title">Chef de Projet — National Robotics Week 8.0 | IEEE RAS INSAT</p>
+        <p class="edu-detail">Pilotage d'un événement national de référence en robotique, IA et Industrie 4.0, sur 7 jours et avec un budget de 80 000 DT. Management d'une équipe de 50 personnes et coordination de partenaires industriels, institutionnels et internationaux. Supervision de la stratégie, des programmes techniques, des partenariats, des opérations et de l'exécution globale de l'événement.</p>
+      </div>
+    </div>
+    <div class="edu reveal">
+      <div class="edu-date mono">Jan. – Juin 2024</div>
+      <div>
+        <p class="edu-title">Responsable Sponsoring — National Robotics Weekend</p>
+        <p class="edu-detail">IEEE RAS INSAT — gestion d'une équipe de 6 personnes : partenariats, négociation et suivi des engagements.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-head reveal"><span class="section-num">§07</span><h2 class="section-title">Contact</h2></div>
+    <div class="contact-box reveal">
+      <div>
+        <h2 style="font-size:20px;">Ouvert aux opportunités de PFE</h2>
+        <p class="prose">Disponible pour un stage de fin d'études de 6 mois à partir de février 2027. N'hésitez pas à me contacter directement.</p>
+      </div>
+      <ul class="contact-list">
+        <li class="contact-row"><span class="val">mohamedamine.ayadi@insat.ucar.tn</span><button class="copy-btn" data-copy="mohamedamine.ayadi@insat.ucar.tn">Copier</button></li>
+        <li class="contact-row"><span class="val">+216 55 94 64 63</span><button class="copy-btn" data-copy="+216 55 94 64 63">Copier</button></li>
+        <li class="contact-row"><span class="val">linkedin.com/in/ayadi-mohamed-amine</span><a class="copy-btn" style="text-decoration:none;" href="https://www.linkedin.com/in/ayadi-mohamed-amine-16476427a/" target="_blank" rel="noopener">Ouvrir</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>Mohamed Amine Ayadi — Tunis, Tunisie</p>
+  </footer>
+</div>
+
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" role="dialog" aria-modal="true">
+    <div class="modal-top">
+      <div>
+        <span class="badge" id="modal-year"></span>
+        <h3 id="modal-title"></h3>
+      </div>
+      <button class="modal-close" id="modal-close" aria-label="Fermer">✕</button>
+    </div>
+    <p id="modal-body"></p>
+    <div class="card-tags" id="modal-tags"></div>
+  </div>
+</div>
+
+<script>
+  // ---------- keywords ----------
+  var keywords = [
+    "Ingénieur Industriel", "Production Engineer", "Amélioration Continue / Lean Manufacturing",
+    "Continuous Improvement Engineer", "Ingénieur Qualité / Quality Engineer",
+    "Supply Chain & Logistique", "Automatisme & Contrôle-Commande", "Data & Performance Industrielle"
+  ];
+  var kwRow = document.getElementById('keyword-row');
+  keywords.forEach(function(k){
+    var s = document.createElement('span');
+    s.className = 'kw';
+    s.textContent = k;
+    kwRow.appendChild(s);
+  });
+
+  // ---------- domains ----------
+  var domains = [
+    { n:"01", title:"Amélioration Continue & Lean", desc:"Terrain, standardisation, résolution structurée de problèmes (QRQC, AMDEC, 8D)." },
+    { n:"02", title:"Qualité & Contrôle Process", desc:"Capabilité machine, plans de contrôle, traitement des non-conformités et des aléas qualité." },
+    { n:"03", title:"Automatisme & Systèmes Industriels", desc:"Contrôle-commande, TIA Portal/S7-1200, communication IHM/OPC, supervision." },
+    { n:"04", title:"Data & Performance Industrielle", desc:"Power BI, tableaux de bord KPI, automatisation VBA, analyse de données de production." },
+    { n:"05", title:"Gestion de Projet & Supply Chain", desc:"Planification, SAP/GPAO, simulation de flux, pilotage de projets transverses." }
+  ];
+  var domainGrid = document.getElementById('domain-grid');
+  domains.forEach(function(d, i){
+    var el = document.createElement('div');
+    el.className = 'domain-card plate reveal';
+    el.style.transitionDelay = (i*70)+'ms';
+    el.innerHTML = '<span class="num mono">'+d.n+'</span><h3>'+d.title+'</h3><p>'+d.desc+'</p>';
+    domainGrid.appendChild(el);
+  });
+
+  // ---------- projects ----------
+  var projects = [
+    {
+      title:"Robot Mobile Autonome d'Inspection Industrielle", year:"PFA", cat:"academique",
+      summary:"Robot d'inspection conçu de A à Z avec une équipe de 4 : simulation temps réel répliquée sur un pont matériel.",
+      detail:"Projet de fin d'année mené avec une équipe de 4 étudiants : robot d'inspection industrielle autonome intégrant simulation, matériel embarqué et interfaces pilotées par IA. Monde d'usine personnalisé sous Gazebo (zones Stock, Production, Bureau), navigation autonome via ROS2 Nav2 et SLAM Toolbox, capteur de gaz MQ-2 physique relié par ESP32/micro-ROS, contrôle vocal offline avec Vosk, et dashboard de supervision PyQt6 affichant position, niveaux de gaz, batterie et LiDAR en direct. Le pont ESP32 reflète la simulation en temps réel via WiFi avec un watchdog de sécurité de 500 ms.",
+      tags:["ROS2","Gazebo","ESP32","micro-ROS","PyQt6","SLAM"]
+    },
+    {
+      title:"Système de Vision Industrielle Embarquée", year:"Projet", cat:"academique",
+      summary:"Vision embarquée pour le contrôle qualité : tri automatique et lecture OCR de dates de fabrication.",
+      detail:"Système de vision embarqué pour le contrôle qualité sur Raspberry Pi 5, développé en Python avec OpenCV. Fonctions : tri automatique des pièces, positionnement d'étiquettes à précision sub-millimétrique, et lecture OCR des dates de fabrication directement sur la ligne.",
+      tags:["Python","OpenCV","Raspberry Pi 5","OCR"]
+    },
+    {
+      title:"Planification & Gestion de Production SAP", year:"2025", cat:"academique",
+      summary:"Cycle de production complet exécuté sous SAP, du paramétrage à la clôture technique.",
+      detail:"Projet académique en partenariat avec Wynsys dans le cadre du module GPAO : modélisation et exécution d'un cycle de production complet sous SAP pour un produit manufacturé. Données de base (FERT/HALB/ROH), nomenclatures multi-niveaux, postes de charge, gammes et versions de production, puis exécution d'ordres de fabrication de bout en bout (paramétrage MRP, création d'ordre, disponibilité des composants, confirmation, clôture technique).",
+      tags:["SAP","GPAO","MRP"]
+    },
+    {
+      title:"Simulation de Chaîne de Production", year:"2026", cat:"academique",
+      summary:"Modélisation d'une chaîne industrielle sous AnyLogic pour identifier les goulots d'étranglement.",
+      detail:"Modélisation et évaluation d'une chaîne de production industrielle avec une logique de simulation personnalisée en Java sous AnyLogic. Utilisation d'Excel pour l'analyse d'indicateurs, les tests de scénarios et l'identification des goulots d'étranglement.",
+      tags:["AnyLogic","Java","Excel"]
+    },
+    {
+      title:"Simulation Industrielle Virtuelle", year:"2025", cat:"academique",
+      summary:"Ligne de production automatisée simulée de bout en bout, de l'automatisme au contrôle qualité.",
+      detail:"Simulation de bout en bout d'une ligne de production automatisée combinant TIA Portal, Factory I/O et GRAFCET/GEMMA, couvrant l'automatisme, la gestion des stocks et le contrôle qualité.",
+      tags:["TIA Portal","Factory I/O","GRAFCET","GEMMA"]
+    },
+    {
+      title:"Chef de Projet — Simulation de Gestion de Projet", year:"2025", cat:"academique",
+      summary:"Pilotage complet d'un projet simulé : charte, WBS, planning, risques et dashboard KPI.",
+      detail:"Simulation complète de gestion de projet dans le cadre du module Management de Projets à l'INSAT : charte de projet, matrice RACI, structure WBS, planning PERT/CPM/Gantt, registre des risques, plan qualité et dashboard de suivi KPI/ESG.",
+      tags:["RACI","WBS","PERT/Gantt","KPI"]
+    },
+    {
+      title:"Outil d'Automatisation de Capabilité FCT", year:"Stage 2026", cat:"stage",
+      summary:"Outil VBA/Excel remplaçant un traitement manuel répétitif des calculs de capabilité.",
+      detail:"Conçu et intégré, pendant le stage Amélioration Continue & Qualité chez Asteelflash, un outil d'automatisation (FCT Capability Automation Tool) sous VBA/Excel pour fiabiliser et accélérer les calculs de capabilité FCT, en remplacement d'un traitement manuel répétitif source d'erreurs.",
+      tags:["VBA","Excel","Automatisation"]
+    },
+    {
+      title:"Analyse de Données de Test FCT (Power BI)", year:"Stage 2026", cat:"stage",
+      summary:"Identification du sous-test générant le plus de défauts pour guider les actions correctives qualité.",
+      detail:"Extraction des données de test FCT (Functional Circuit Test) depuis une machine de test, puis analyse de la base de données sous Power BI pour identifier le sous-test générant le plus de défauts. Résultats utilisés par l'équipe qualité pour définir des actions correctives ciblées et prévenir la récurrence de ces défauts.",
+      tags:["Power BI","Analyse de données","Qualité"]
+    },
+    {
+      title:"Système de Contrôle QR Code sur Poste d'Assemblage", year:"Stage 2025", cat:"stage",
+      summary:"Chaîne de communication industrielle complète, du lecteur QR code à la base de données.",
+      detail:"Pendant le stage Développement de Tests chez Asteelflash : développement d'un système de contrôle sur un poste d'assemblage assurant la communication complète entre un lecteur QR code industriel (Cognex DataMan), un automate Siemens S7-1200 programmé sous TIA Portal, une IHM et une application développée en LabWindows/CVI, via un serveur OPC. L'objectif : lire automatiquement le QR code, le transmettre à l'automate, l'afficher sur l'IHM, puis l'envoyer via OPC à l'application LabWindows/CVI qui vérifie en base de données l'état de la carte avant d'autoriser son assemblage.",
+      tags:["Cognex DataMan","Siemens S7-1200","TIA Portal","LabWindows/CVI","OPC"]
+    },
+    {
+      title:"Étude AMDEC & Mise à Jour du Plan de Contrôle", year:"Stage 2026", cat:"stage",
+      summary:"Étude AMDEC complète menée suite à des modifications process/machines.",
+      detail:"Réalisation d'une étude AMDEC complète et mise à jour du plan de contrôle d'une ligne de production suite à des modifications process et machines, afin de sécuriser la conformité de la ligne. Travail mené en parallèle d'un suivi via études MSA (Cg/Cgk) et de capabilité machine (Cm/Cmk) sur 3 machines goulots.",
+      tags:["AMDEC","Plan de Contrôle","MSA","Cm/Cmk"]
+    },
+    {
+      title:"Qualification d'un Nouveau Prototype Client (Bosch)", year:"Stage 2026", cat:"stage",
+      summary:"Coordination transverse sur 3 étapes de production pour la qualification d'un nouveau prototype.",
+      detail:"Participation à la qualification d'un nouveau prototype client (Bosch) à travers 3 étapes de production (CMS, vague, intégration), en coordination transverse avec les équipes production et NPI (nouveaux produits), incluant le suivi des modifications et la vérification de conformité à chaque étape.",
+      tags:["NPI","Qualification produit","Coordination transverse"]
+    }
+  ];
+
+  var projGrid = document.getElementById('proj-grid');
+  var filterBar = document.getElementById('filter-bar');
+  var filters = [ {key:'all', label:'Tous'}, {key:'academique', label:'Académiques'}, {key:'stage', label:'En stage'} ];
+  var activeFilter = 'all';
+
+  function renderFilters(){
+    filterBar.innerHTML = '';
+    filters.forEach(function(f){
+      var b = document.createElement('button');
+      b.className = 'filter-btn' + (f.key === activeFilter ? ' active' : '');
+      b.textContent = f.label;
+      b.addEventListener('click', function(){ activeFilter = f.key; renderFilters(); renderProjects(); });
+      filterBar.appendChild(b);
+    });
+  }
+
+  function renderProjects(){
+    projGrid.innerHTML = '';
+    var list = projects.filter(function(p){ return activeFilter === 'all' || p.cat === activeFilter; });
+    list.forEach(function(p, i){
+      var card = document.createElement('button');
+      card.className = 'card plate reveal in';
+      card.style.transitionDelay = (i*45)+'ms';
+      card.innerHTML =
+        '<div class="card-top"><h3>'+p.title+'</h3><span class="card-year mono">'+p.year+'</span></div>'+
+        '<p>'+p.summary+'</p>'+
+        '<div class="card-tags">'+p.tags.map(function(t){ return '<span>'+t+'</span>'; }).join('')+'</div>'+
+        '<div class="card-more">Voir le détail <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6h8M7 2l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';
+      card.addEventListener('click', function(){ openModal(p); });
+      projGrid.appendChild(card);
+    });
+  }
+  renderFilters();
+  renderProjects();
+
+  // ---------- modal ----------
+  var backdrop = document.getElementById('modal-backdrop');
+  function openModal(p){
+    document.getElementById('modal-year').textContent = p.year;
+    document.getElementById('modal-title').textContent = p.title;
+    document.getElementById('modal-body').textContent = p.detail;
+    document.getElementById('modal-tags').innerHTML = p.tags.map(function(t){ return '<span>'+t+'</span>'; }).join('');
+    backdrop.classList.add('open');
+  }
+  function closeModal(){ backdrop.classList.remove('open'); }
+  document.getElementById('modal-close').addEventListener('click', closeModal);
+  backdrop.addEventListener('click', function(e){ if(e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+  // ---------- scroll reveal ----------
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){ entry.target.classList.add('in'); observer.unobserve(entry.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(function(el){ observer.observe(el); });
+  document.querySelectorAll('.hero .reveal').forEach(function(el, i){
+    el.style.transitionDelay = (i*90)+'ms';
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ el.classList.add('in'); }); });
+  });
+
+  // ---------- copy buttons ----------
+  document.querySelectorAll('.copy-btn[data-copy]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-copy');
+      var done = function(){
+        var original = btn.textContent;
+        btn.textContent = 'Copié';
+        setTimeout(function(){ btn.textContent = original; }, 1400);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(done).catch(function(){
+          try{
+            var range = document.createRange();
+            var span = document.createElement('span');
+            span.textContent = text;
+            span.style.position='fixed'; span.style.opacity='0';
+            document.body.appendChild(span);
+            range.selectNode(span);
+            var sel = window.getSelection();
+            sel.removeAllRanges(); sel.addRange(range);
+            document.execCommand('copy');
+            document.body.removeChild(span);
+            done();
+          }catch(e){}
+        });
+      }
+    });
+  });
+</script>
